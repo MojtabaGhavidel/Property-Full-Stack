@@ -12,8 +12,8 @@ import { DataService } from './services/data.service';
 import { ToastComponent } from './shared/toast/toast.component';
 
 const routing = RouterModule.forRoot([
-    { path: '',      component: HomeComponent },
-    { path: 'about', component: AboutComponent }
+    { path: '',      component: AboutComponent },
+    { path: 'cat', component: HomeComponent }
 ]);
 
 @NgModule({
