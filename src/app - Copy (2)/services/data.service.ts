@@ -27,21 +27,5 @@ export class DataService {
   deleteCat(cat): Observable<any> {
     return this.http.delete(`/cat/${cat._id}`, this.options);
   }
-  getMelks(): Observable<any> {
-    return this.http.get('/melks').map(res => res.json());
-  }
-
-  addMelk(melk): Observable<any> {
-    return this.http.post("/melk", JSON.stringify(melk), this.options);
-  }
-
-  editMelk(melk): Observable<any> {
-    return this.http.put(`/melk/${melk._id}`, JSON.stringify(melk), this.options);
-  }
-
-  deleteMelk(melk): Observable<any> {
-    return this.http.delete(`/melk/${melk._id}`, this.options);
-  }
-
-
+  
 }

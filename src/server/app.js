@@ -19,7 +19,8 @@ var db = mongoose.connection;
 mongoose.Promise = global.Promise;
 
 // Models
-var Cat = require('./cat.model.js');
+var Cat = require('./cat.model.js')
+var Melk = require('./melk.model.js');
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -34,9 +35,25 @@ db.once('open', function() {
     });
   });
 
+  // select all
+  app.get('/melks', function(req, res) {
+    Melk.find({}, function(err, docs) {
+      if(err) return console.error(err);
+      res.json(docs);
+    });
+  });
+
   // count all
   app.get('/cats/count', function(req, res) {
     Cat.count(function(err, count) {
+      if(err) return console.error(err);
+      res.json(count);
+    });
+  });
+
+  // count all
+  app.get('/melks/count', function(req, res) {
+    Melk.count(function(err, count) {
       if(err) return console.error(err);
       res.json(count);
     });
@@ -51,8 +68,25 @@ db.once('open', function() {
     });
   });
 
+  // create
+  app.post('/melk', function(req, res) {
+    var obj = new Melk(req.body);
+    obj.save(function(err, obj) {
+      if(err) return console.error(err);
+      res.status(200).json(obj);
+    });
+  });
+
   // find by id
   app.get('/cat/:id', function(req, res) {
+    Cat.findOne({_id: req.params.id}, function(err, obj) {
+      if(err) return console.error(err);
+      res.json(obj);
+    })
+  });
+
+  // find by id
+  app.get('/melk/:id', function(req, res) {
     Cat.findOne({_id: req.params.id}, function(err, obj) {
       if(err) return console.error(err);
       res.json(obj);
@@ -67,6 +101,14 @@ db.once('open', function() {
     })
   });
 
+  // update by id
+  app.put('/melk/:id', function(req, res) {
+    Melk.findOneAndUpdate({_id: req.params.id}, req.body, function(err) {
+      if(err) return console.error(err);
+      res.sendStatus(200);
+    })
+  });
+
   // delete by id
   app.delete('/cat/:id', function(req, res) {
     Cat.findOneAndRemove({_id: req.params.id}, function(err) {
@@ -74,6 +116,15 @@ db.once('open', function() {
       res.sendStatus(200);
     });
   });
+
+  // delete by id
+  app.delete('/melk/:id', function(req, res) {
+    Melk.findOneAndRemove({_id: req.params.id}, function(err) {
+      if(err) return console.error(err);
+      res.sendStatus(200);
+    });
+  });
+
 
 
   // all other routes are handled by Angular
