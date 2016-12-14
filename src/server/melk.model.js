@@ -1,9 +1,16 @@
 var mongoose = require('mongoose');
 
 var melkSchema = mongoose.Schema({
-    name: String,
-    weight: Number,
-    age: Number
+    melkType: String,
+    karbari : String,
+    city: String,
+    sanadType: String,
+    agahiTitle: String,
+    email: String,
+    mobile: Number,
+    description: String
+    
+  
 });
 
 var Melk = mongoose.model('Melk', melkSchema);

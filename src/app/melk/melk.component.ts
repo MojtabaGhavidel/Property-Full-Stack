@@ -20,9 +20,14 @@ export class SubmitComponent implements OnInit {
   private isEditing = false;
 
   private addMelkForm: FormGroup;
-  private name = new FormControl("", Validators.required);
-  private age = new FormControl("", Validators.required);
-  private weight = new FormControl("", Validators.required);
+  private melkType = new FormControl("", Validators.required);
+  private city = new FormControl("", Validators.required);
+  private karbari = new FormControl("", Validators.required);
+  private sanadType = new FormControl("", Validators.required);
+  private agahiTitle = new FormControl("", Validators.required);
+  private email = new FormControl("", Validators.required);
+  private mobile = new FormControl("", Validators.required);
+  private description = new FormControl("", Validators.required);
 
   constructor(private http: Http,
               private dataService: DataService,
@@ -33,9 +38,15 @@ export class SubmitComponent implements OnInit {
     this.getMelks();
 
     this.addMelkForm = this.formBuilder.group({
-      name: this.name,
-      age: this.age,
-      weight: this.weight
+      melkType: this.melkType,
+      city: this.city,
+      karbari: this.karbari,
+      sanadType: this.sanadType,
+      agahiTitle: this.agahiTitle,
+      email: this.email,
+      mobile: this.mobile,
+      description: this.description
+
     });
   }
 

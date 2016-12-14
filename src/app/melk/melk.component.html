@@ -8,44 +8,71 @@
 <app-toast [message]="toast.message"></app-toast>
 
 <div class="card" *ngIf="!isLoading">
-  <h4 class="card-header">Current ({{melks.length}})</h4>
+  <h4 class="card-header">تعداد آگهی های ثبت شده :{{melks.length}}</h4>
   <div class="card-block">
     <table class="table table-bordered table-striped">
       <thead class="thead-default">
         <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Weight</th>
+          <th>نوع ملک</th>
+          <th>شهر</th>
+          <th>کاربری</th>
+          <th>نوع سند</th>
+          <th>عنوان آگهی</th>
+          <th>ایمیل</th>
+          <th>موبایل</th>
+          <th>توضیحات تکمیلی</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody *ngIf="melks.length === 0">
         <tr>
           <td colspan="4">There are no  in the DB. Add a new  below.</td>
-        </tr>  
+        </tr>
       </tbody>
       <tbody *ngIf="!isEditing">
         <tr *ngFor="let melk of melks">
-          <td>{{melk.name}}</td>
-          <td>{{melk.age}}</td>
-          <td>{{melk.weight}}</td>
+          <td>{{melk.melkType}}</td>
+          <td>{{melk.city}}</td>
+          <td>{{melk.karbari}}</td>
+          <td>{{melk.sanadType}}</td>
+          <td>{{melk.agahiTitle}}</td>
+          <td>{{melk.email}}</td>
+          <td>{{melk.mobile}}</td>
+          <td>{{melk.description}}</td>
           <td>
-            <button class="btn btn-sm btn-warning" (click)="enableEditing(melk)"><i class="fa fa-pencil"></i> Edit</button> <button class="btn btn-sm btn-danger" (click)="deleteMelk(melk)"><i class="fa fa-trash"></i> Delete</button>
+            <button class="btn btn-sm btn-warning" (click)="enableEditing(melk)"><i class="fa fa-pencil"></i> ویرایش</button> <button class="btn btn-sm btn-danger" (click)="deleteMelk(melk)"><i class="fa fa-trash"></i> حذف</button>
           </td>
-        </tr>  
+        </tr>
       </tbody>
       <tbody *ngIf="isEditing">
         <tr>
           <td colspan="4">
             <form class="form-inline" #form="ngForm" (ngSubmit)="editMelk(melk)" style="display:inline">
               <div class="form-group">
-                  <input class="form-control" type="text" name="name" [(ngModel)]="melk.name" placeholder="Name" required>
+                  <input class="form-control" type="text" name="melkType" [(ngModel)]="melk.melkType" placeholder="Name" required>
               </div>
               <div class="form-group">
-                <input class="form-control" type="number" name="age" [(ngModel)]="melk.age" placeholder="Age" min="0" required>
+                <input class="form-control" type="text" name="city" [(ngModel)]="melk.city" placeholder="شهر" min="0" required>
               </div>
               <div class="form-group">
-                <input class="form-control" type="number" name="weight" [(ngModel)]="melk.weight" placeholder="Weight" step="any" min="0" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="email" [(ngModel)]="melk.email" placeholder="ایمیل" step="any" min="0" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="karbari" [(ngModel)]="melk.karbari" placeholder="کاربری" step="any" min="0" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="sanadType" [(ngModel)]="melk.sanadType" placeholder="نوع سند" step="any" min="0" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="agahiTitle" [(ngModel)]="melk.agahiTitle" placeholder="عنوان آگهی" step="any" min="0" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="number" name="mobile" [(ngModel)]="melk.mobile" placeholder="موبایل" step="any" min="0" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="descriptiob" [(ngModel)]="melk.description" placeholder="توضیحات تکمیلی " step="any" min="0" required>
               </div>
               <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Save</button>
             </form>
@@ -58,19 +85,38 @@
 </div>
 
 <div class="card" *ngIf="!isEditing">
-  <h4 class="card-header">Add new </h4>
+  <h4 class="card-header">ثبت آگهی ملک جدید </h4>
   <div class="card-block">
-    <form class="form-inline" [formGroup]="addMelkForm" (ngSubmit)="addMelk()" style="text-align:center">
+    <form class="form" [formGroup]="addMelkForm" (ngSubmit)="addMelk()" style="text-align:center">
       <div class="form-group">
-          <input class="form-control" type="text" name="name" formControlName="name" placeholder="Name">
+          <input class="form-control" type="text" name="melkType" formControlName="melkType" placeholder="نوع ملک">
       </div>
       <div class="form-group">
-        <input class="form-control" type="number" name="age" formControlName="age" placeholder="Age" min="0">
+        <input class="form-control" type="text" name="city" formControlName="city" placeholder="شهر" min="0">
       </div>
       <div class="form-group">
-        <input class="form-control" type="number" name="weight" formControlName="weight" placeholder="Weight" step="any" min="0">
+        <input class="form-control" type="text" name="karbari" formControlName="karbari" placeholder="کاربری" step="any" min="0">
       </div>
-      <button class="btn btn-primary" type="submit" [disabled]="!addMelkForm.valid"><i class="fa fa-floppy-o"></i> Add</button>
+      <div class="form-group">
+        <input class="form-control" type="text" name="sanadType" formControlName="sanadType" placeholder="نوع سند" step="any" min="0">
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="agahiTitle" formControlName="agahiTitle" placeholder="عنوان آگهی" step="any" min="0">
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="email" formControlName="email" placeholder="ایمیل" step="any" min="0">
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="number" name="mobile" formControlName="mobile" placeholder="موبایل" step="any" min="0">
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="description" formControlName="description" placeholder="توضیحات تکمیلی" step="any" min="0">
+      </div>
+      <div>
+        <label>قوانین را مطالعه کرده ام و قبول دارم </label>
+        <input type="checkbox" aria-label="...">
+      </div>
+      <button class="btn btn-primary" type="submit" [disabled]="!addMelkForm.valid"><i class="fa fa-floppy-o"></i> ثبت آگهی</button>
     </form>
   </div>
 </div>
