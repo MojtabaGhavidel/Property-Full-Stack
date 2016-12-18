@@ -112,6 +112,18 @@
       <div class="form-group">
         <input class="form-control" type="text" name="description" formControlName="description" placeholder="توضیحات تکمیلی" step="any" min="0">
       </div>
+      <div class="form-group">
+        <label>شهر</label>
+        <ng-select [allowClear]="false"
+                   [items]="cities"
+                   [disabled]="disabled"
+                   (data)="refreshValue($event)"
+                   (selected)="selected($event)"
+                   (removed)="removed($event)"
+                   (typed)="typed($event)"
+                   placeholder="شهر آگهی را انتخاب کنید">
+        </ng-select>
+      </div>
       <div>
         <label>قوانین را مطالعه کرده ام و قبول دارم </label>
         <input type="checkbox" aria-label="...">

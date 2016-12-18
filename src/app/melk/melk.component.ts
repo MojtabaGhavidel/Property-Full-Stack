@@ -29,11 +29,23 @@ export class SubmitComponent implements OnInit {
   private mobile = new FormControl("", Validators.required);
   private description = new FormControl("", Validators.required);
 
+z
+
+
+  public cities:Array<string> = ['تهران', 'رشت', 'کرج', 'مشهد',
+    'اصفهان', 'تبریز', 'شیراز', 'اهواز', 'قم',
+    'کرمانشاه', 'ارومیه', 'زاهدان', 'کرمان', 'همدان', 'اراک',
+    'یزد', 'اردبیل', 'بندرعباس', 'قزوین', 'زنجان', 'گرگان',
+    'ساری', 'دزفول', 'آبادان', 'بوشهر', 'بوشهر', 'بروجرد', 'خرم‌آباد',
+    'سنندج', 'اسلام‌شهر', 'کاشان', 'نجف‌آباد', 'ایلام', 'کیش', 'بیرجند',
+    'سمنان', 'شهرکرد', 'بندر ماهشهر', 'یاسوج', 'بجنورد', 'بهبهان', 'سبزوار',
+    ' مسجد سلیمان', 'نیشابور', 'شوشتر', 'قشم', 'بانه', 'آمل',
+    'بابل', 'قائم‌شهر', 'ساوه', 'زابل'];
+
   constructor(private http: Http,
               private dataService: DataService,
               private toast: ToastComponent,
               private formBuilder: FormBuilder) { }
-
   ngOnInit() {
     this.getMelks();
 
@@ -49,6 +61,7 @@ export class SubmitComponent implements OnInit {
 
     });
   }
+
 
   getMelks() {
     this.dataService.getMelks().subscribe(
@@ -105,6 +118,35 @@ export class SubmitComponent implements OnInit {
         error => console.log(error)
       );
     }
+  }
+
+  private value:any = {};
+  private _disabledV:string = '0';
+  private disabled:boolean = false;
+
+  private get disabledV():string {
+    return this._disabledV;
+  }
+
+  private set disabledV(value:string) {
+    this._disabledV = value;
+    this.disabled = this._disabledV === '1';
+  }
+
+  public selected(value:any):void {
+    console.log('Selected value is: ', value);
+  }
+
+  public removed(value:any):void {
+    console.log('Removed value is: ', value);
+  }
+
+  public typed(value:any):void {
+    console.log('New search input: ', value);
+  }
+
+  public refreshValue(value:any):void {
+    this.value = value;
   }
 
 }

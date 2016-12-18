@@ -3,6 +3,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { SelectModule } from 'ng2-select';
+
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -31,7 +33,8 @@ const routing = RouterModule.forRoot([
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    routing
+    routing,
+    SelectModule
   ],
   providers: [
     DataService,
