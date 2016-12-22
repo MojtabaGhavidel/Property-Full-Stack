@@ -125,6 +125,16 @@
         </ng-select>
       </div>
       <div>
+        <input type="file"
+               ngFileSelect
+               [options]="options"
+               (onUpload)="handleUpload($event)"
+               (beforeUpload)="beforeUpload($event)">
+      </div>
+      <div>
+        Response: {{ uploadFile | json }}
+      </div>
+      <div>
         <label>قوانین را مطالعه کرده ام و قبول دارم </label>
         <input type="checkbox" aria-label="...">
       </div>

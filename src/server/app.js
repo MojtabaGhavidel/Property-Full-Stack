@@ -2,9 +2,13 @@ var express = require('express');
 var path = require('path');
 var morgan = require('morgan'); // logger
 var bodyParser = require('body-parser');
+const cors = require('cors'); //for uploader
+const multer = require('multer'); //for uploader
 
 var app = express();
 app.set('port', (process.env.PORT || 3000));
+
+app.use(cors());//for uploader
 
 app.use('/', express.static(__dirname + '/../../dist'));
 app.use('/src/assets', express.static('public'))
@@ -27,6 +31,29 @@ var Melk = require('./melk.model.js');
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('Connected to MongoDB');
+
+
+  const upload = multer({
+    dest: 'uploads/',
+    storage: multer.diskStorage({
+        filename: (req, file, cb) => {
+          let ext = path.extname(file.originalname);
+          cb(null, `${Math.random().toString(36).substring(7)}${ext}`);
+
+        }
+    })
+  });
+
+  app.post('/upload', upload.any(), (req, res) => {
+    res.json(req.files.map(file => {
+      let ext = path.extname(file.originalname);
+      return {
+        originalName: file.originalname,
+        filename: file.filename
+      }
+    }));
+  });
+
 
   // APIs
   // select all

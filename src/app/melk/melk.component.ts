@@ -29,7 +29,7 @@ export class SubmitComponent implements OnInit {
   private mobile = new FormControl("", Validators.required);
   private description = new FormControl("", Validators.required);
 
-z
+
 
 
   public cities:Array<string> = ['تهران', 'رشت', 'کرج', 'مشهد',
@@ -147,6 +147,33 @@ z
 
   public refreshValue(value:any):void {
     this.value = value;
+  }
+
+  ///Upload///
+  
+  uploadFile: any;
+  hasBaseDropZoneOver: boolean = false;
+  options: Object = {
+    url: 'http://localhost:3000/upload'
+  };
+  sizeLimit = 2000000;
+
+  handleUpload(data): void {
+    if (data && data.response) {
+      data = JSON.parse(data.response);
+      this.uploadFile = data;
+    }
+  }
+
+  fileOverBase(e:any):void {
+    this.hasBaseDropZoneOver = e;
+  }
+
+  beforeUpload(uploadingFile): void {
+    if (uploadingFile.size > this.sizeLimit) {
+      uploadingFile.setAbort();
+      alert('File is too large');
+    }
   }
 
 }

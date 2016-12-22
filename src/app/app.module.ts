@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { SelectModule } from 'ng2-select';
+import { Ng2UploaderModule } from 'ng2-uploader';
+
 
 
 import { AppComponent } from './app.component';
@@ -34,7 +36,8 @@ const routing = RouterModule.forRoot([
     ReactiveFormsModule,
     HttpModule,
     routing,
-    SelectModule
+    SelectModule,
+    Ng2UploaderModule
   ],
   providers: [
     DataService,

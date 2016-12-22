@@ -3,4 +3,8 @@
 body {
     margin-top: 15px;
     margin-bottom: 10px;
+    background: #f7f7f7;
+    color: #727272;
+    font: 12px "Open Sans", Arial, Helvetica, sans-serif;
 }
+
